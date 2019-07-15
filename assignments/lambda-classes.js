@@ -1,7 +1,7 @@
 // CODE here for your Lambda Classes
 
-class Person {
-  constructor(attributes) {
+class Person { // Parent over all classes, the initial class Person.
+  constructor(attributes) { // Properties assignment attributes for every Person.
     this.name = attributes.name;
     this.age = attributes.age;
     this.location = attributes.location;
@@ -20,15 +20,15 @@ class Instructor extends Person {
     this.catchPhrase = instructorAttributes.catchPhrase;
   }
 
-  demo() {
-    return `Today we are learning about ${this.subject}`;
+  demo(subject) {
+    return `Today we are learning about ${subject}`;
   }
-  grade() {
-    return `${this.name} receives a perfect score on ${this.subject}`;
+  grade(studentObj, subject) {
+    return `${studentObj.name} recieves a perfect score on ${subject}!`;
   }
 }
 
-class Student extends Instructor {
+class Student extends Person {
   constructor(studentsAttributes) {
     super(studentsAttributes);
     this.previousBackground = studentsAttributes.previousBackground;
@@ -37,13 +37,13 @@ class Student extends Instructor {
   }
 
   listsSubjects() {
-    return `${studentsAttributes.favSubjects}`;
+    return `${this.name} likes ${this.favSubjects}`;
   }
-  PRAssignment() {
-    return `${this.name} has submitted a PR for ${this.subject}`;
+  PRAssignment(subject) {
+    return `${this.name} has submitted a PR for ${subject}`;
   }
-  sprintChallenge() {
-    return `${this.name} has begun sprint challenge on ${this.subject}`;
+  sprintChallenge(subject) {
+    return `${this.name} has begun sprint challenge on ${subject}!`;
   }
 }
 
@@ -54,66 +54,66 @@ class ProjectManager extends Instructor {
         this.favInstructor = PMAttributes.favInstructor;
     }
 
-     standUp() {
-        console.log(`${this.name} announces to ${this.channel}`);
+     standUp(channel) {
+        console.log(`${this.name} announces to ${channel}`);
     }
 
-     debugsCode() {
-        console.log(`${this.name} debugs ${students.name}'s code on ${this.subject}`);
+     debugsCode(student, subject) {
+        console.log(`${this.name} debugs ${students.name}'s code on ${subject}`);
     }
 }// PM
 
 // OBJECTS
-const evelyn = new Person ({
-   "name": 'Evelyn',
-   "age": 31,
-   "location":'Guam',
-   "gender": "F",
+const bob = new Person ({
+   "name": 'Bob',
+   "age": 42,
+   "location":'El Paso',
+   "gender": "M",
 });
 const tim = new Person({
    "name": 'Tim',
-   "age": 40,
-   "location": 'New York',
+   "age": 70,
+   "location": 'Buffalo',
    "gender": "M",
 });
-const don = new Person({
-   "name": 'Don',
-   "age": 45,
-   "location": 'Hawaii',
+const carl = new Person({
+   "name": 'Carl',
+   "age": 30,
+   "location": 'Tampa',
    "gender": "M",
 });
 
-const josh = new Instructor({
-   "name": 'Josh',
-   "age": 48,
-   "location": 'Utah',
+const jim = new Instructor({
+   "name": 'Jim',
+   "age": 39,
+   "location": 'Chesapeake',
    "gender": "M",
    "specialty": 'Redux',
    "favLanguage": 'Python',
    "catchPhrase": 'Never Surrender!!',
 });
-const moises = new Instructor({
-   "name": 'Moises',
-   "age": 35,
-   "location": 'Florida',
+const mark = new Instructor({
+   "name": 'Mark',
+   "age": 73,
+   "location": 'Tulsa',
    "gender": "M",
    "specialty": 'JavaScript',
    "favLanguage": 'French',
    "catchPhrase": 'Viva Cuba!!',
 });
-const jax = new Instructor({
-   "name": 'Jackee',
-   "age": 30,
-   "location": 'North Dakota',
+const jessica = new Instructor({
+   "name": 'Jessica',
+   "age": 60,
+   "location": 'Cleveland',
    "gender": "F",
    "specialty": 'Zoom',
    "favLanguage": 'Spanish',
    "catchPhrase": 'Lets talk about it!!',
 });
 
-const lavell = new Student({
-   "name": 'lavell',
-   "age": 30,
+const jerome = new Student({
+   "name": 'Jerome',
+   "age": 31,
    "location": 'San Francisco',
    "gender": "M",
     "previousBackground": 'Teacher',
@@ -141,10 +141,10 @@ const marco = new Student({
    "favSubjects": 'Coding',
 });
 
-const dresean = new ProjectManager({
-   "name": 'DreSean',
-   "age": 33,
-   "location": 'Chicago',
+const deandre = new ProjectManager({
+   "name": 'Deandre',
+   "age": 36,
+   "location": 'Denver',
    "gender": 'M',
    "specialty": 'Python tutor',
    "favLanguage": 'German',
@@ -152,10 +152,10 @@ const dresean = new ProjectManager({
    "gradClassName": 'CS5',
    "favInstructor": 'Josh Knell',
 });
-const patrick = new ProjectManager({
-   "name": 'Patrick',
-   "age": 45,
-   "location": 'Mississippi',
+const rick = new ProjectManager({
+   "name": 'Rick',
+   "age": 47,
+   "location": 'Durham',
    "gender": 'M',
    "specialty": 'JS',
    "favLanguage": 'Italian',
@@ -163,10 +163,10 @@ const patrick = new ProjectManager({
    "gradClassName": 'CS1',
    "favInstructor": 'Patty Kennedy',
 });
-const dante = new ProjectManager({
-   "name": 'Dante',
-   "age": 35,
-   "location": 'Phillipines',
+const reggie = new ProjectManager({
+   "name": 'Reggie',
+   "age": 43,
+   "location": 'Los Angeles',
    "gender": 'M',
    "specialty": 'Oracle',
    "favLanguage": 'Chinese',
@@ -176,14 +176,12 @@ const dante = new ProjectManager({
 });
 
 
-console.log(evelyn.name); //?
-console.log(evelyn.speak());
-josh.speak();
-console.log(josh.demo('React'));
-console.log(moises.grade(evelyn,'JavaScript'));
-console.log(moises.grade(jax,'JavaScript'));
-console.log(marco.PRAssignment(evelyn, 'Oracle'));
-console.log(lavell.sprintChallenge(marco, 'React'));
-
-console.log(dresean.gradClassName);
-console.log(dresean.standUp('Dre', 'CS10 Channel'));
+console.log(bob.name); //?
+console.log(bob.speak());
+console.log(jim.demo('React'));
+console.log(mark.grade(bob,'JavaScript'));
+console.log(mark.grade(jessica,'JavaScript'));
+console.log(marco.PRAssignment('Oracle'));
+console.log(jerome.sprintChallenge('React'));
+console.log(deandre.gradClassName);
+console.log(deandre.standUp('Reggie'));
